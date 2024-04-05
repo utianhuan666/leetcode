@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<ul id="myList">
+    <li id="item1">项目 1</li>
+    <li id="item3">项目 3</li>
+    <li id="item2">项目 2</li>
+    <li id="item">项目 4</li>
+</ul>
+<script>
+    function sortAndReturnTextContent() {
+        const items = document.getElementById('myList').children;
+        const numReg = /\d*$/;
+        const htmlCollections = Array.from(items);
+        const getIdToNumber = (idStr)=>{
+            const idExec = numReg.exec(idStr);
+            return idExec && idExec[0] !== undefined && Number(idExec[0]||0)
+        }
+        const newItems = htmlCollections.sort((a,b)=>{
+            const curId = getIdToNumber(a.id);
+            const nextId = getIdToNumber(b.id);
+            return curId - nextId;
+        })
+
+
+        const listContainer = document.getElementById('myList');
+        listContainer.innerHTML=''
+        newItems.forEach(item=>{listContainer.appendChild(item)})
+    }
+    sortAndReturnTextContent()
+
+</script>
+
+</body>
+</html>
+
